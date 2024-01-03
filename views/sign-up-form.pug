@@ -1,8 +1,6 @@
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+extends layout 
+
+block content
     form(class='flex col center' method='post', action='')
         h2 Sign Up
         div(class='flex col group') 
@@ -18,8 +16,8 @@ html
             label(for='password') Password
             input#password(type="password", name="password")
         div(class='flex col group')  
-            label(for='password') Confirm password
-            input#password(type="password", name="password")
+            label(for='confirm-password') Confirm password
+            input#confirm-password(type="password", name="confirm_password")
         div(class='flex col group')
             label(for='code') Already have membership code?
             input#code(type='text', name='code')
