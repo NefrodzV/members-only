@@ -1,13 +1,24 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose')
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const membersOnlyRouter = require('./routes/members_only');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').LocalStrategy
+const bcryptjs = require('bcryptjs')
+require('dotenv').config()
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const DB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.ya3dsnp.mongodb.net/${process.env.DB_Name}?retryWrites=true&w=majority`
+mongoose.connect(DB_URI)
 
-var app = express();
+const db = mongoose.connection
+db.on('error', console.error.bind(console, "mongo connection failed!"))
+
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/members-only', membersOnlyRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
