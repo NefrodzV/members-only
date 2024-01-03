@@ -1,0 +1,30 @@
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    form(class='flex col center' method='post', action='/sign-up')
+        h2 Sign Up
+        div(class='flex col  group') 
+            label(for='firstname') First name
+            input#firstname(type="text", name="first_name")
+        div(class='flex col  group')  
+            label(for='lastname') Last name
+            input#lastname(type='text', name='last_name')
+        div(class='flex col  group')
+            label(for='email') Email
+            input#email(type="text", name="email")
+        div(class='flex col  group')
+            label(for='password') Password
+            input#password(type="password", name="password")
+        div(class='flex col  group')  
+            label(for='password') Confirm password
+            input#password(type="password", name="password")
+        div(class='flex col  group')
+            label(for='code') Already have membership code?
+            input#code(type='text', name='code')
+        button Sign up
+        
+        
+    
+
