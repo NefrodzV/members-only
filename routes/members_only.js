@@ -14,7 +14,7 @@ router.post('/sign-up', async (req, res, next) => {
 })
 
 router.get('/log-in', async (req, res, next) => {
-    res.send('Log in get not implemented')
+    res.render('log-in-form')
 })
 
 router.post('/log-in', async (req, res, next) => {
@@ -23,7 +23,7 @@ router.post('/log-in', async (req, res, next) => {
 
 // Main page where members can post their messages
 router.get('/messages', (req, res, next) => {
-    res.send('Messages path not implemented')
+   res.render('messages')
 })
 
 // Maybe change this form post to another path
