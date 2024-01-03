@@ -21,5 +21,17 @@ router.post('/log-in', async (req, res, next) => {
     res.send('Log in post not implemented')
 })
 
+// Main page where members can post their messages
+router.get('/messages', (req, res, next) => {
+    res.send('Messages path not implemented')
+})
+
+// Maybe change this form post to another path
+router.post('/messages', (req, res, next) => {
+    res.send('Messages post not implemented')
+})
+
+
+
 
 module.exports = router
