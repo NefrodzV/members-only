@@ -3,16 +3,17 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
-    first_name: {type:String, required:true},
-    last_name: {type:String, required:true},
+    firstName: {type:String, required:true},
+    lastName: {type:String, required:true},
     email: {type:String, required:true, unique:true},
     password: {type:String, required:true},
     membership: {
         type: String, 
         required: true,
-        enum: ['Basic', 'Standard', 'Premium'],
+        enum: ['Basic', 'Premium'],
         default: 'Basic'
     },
+    isAdmin: {type: Boolean, default: false}
 })
 
 UserSchema.virtual('fullname').get(() => {
