@@ -2,9 +2,9 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const MessageSchema = new Schema({
-    title: { type:String, required:true },
-    user_id: { type: Schema.Types.ObjectId, required: true},
-    timestamp: {type: Date, default: Date.now},
+    title: { type: String, required: true },
+    userId: { type: Schema.Types.ObjectId, required: true},
+    timestamp: { type: Date, default: Date.now },
     text: String
 })
 
