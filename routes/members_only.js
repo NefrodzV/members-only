@@ -1,35 +1,23 @@
 const express = require('express')
 const router = express.Router()
+const UserController = require('../controllers/UserController')
+const MessageController = require('../controllers/MessageController')
 
-router.get('/', async (req, res, next) => {
-    res.render('index', {title: 'Members only'})
-})
+router.get('/', MessageController.index)
 
-router.get('/sign-up',  async (req, res, next) => {
-    res.render('sign-up-form')
-})
+router.get('/sign-up',  UserController.sign_up_get)
 
-router.post('/sign-up', async (req, res, next) => {
-    res.send('Sign up post not implemented')
-})
+router.post('/sign-up', UserController.sign_up_post)
 
-router.get('/log-in', async (req, res, next) => {
-    res.render('log-in-form')
-})
+router.get('/log-in', UserController.log_in_get)
 
-router.post('/log-in', async (req, res, next) => {
-    res.send('Log in post not implemented')
-})
+router.post('/log-in', UserController.log_in_post)
 
 // Main page where members can post their messages
-router.get('/messages', (req, res, next) => {
-   res.render('messages')
-})
+router.get('/messages', MessageController.message_list)
 
-// Maybe change this form post to another path
-router.post('/messages', (req, res, next) => {
-    res.send('Messages post not implemented')
-})
+/** Same page will have a for to post messages when they are logged in! */
+router.post('/messages', MessageController.create_message_post)
 
 
 
