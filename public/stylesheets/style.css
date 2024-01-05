@@ -6,3 +6,27 @@ body {
 a {
   color: #00B7FF;
 }
+
+.center {
+  align-items: center;
+}
+
+.col {
+  flex-direction: column;
+}
+.flex {
+  display: flex;
+}
+.group {
+  width: 25%;
+  margin-block: .5rem;
+}
+
+button {
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+
