@@ -5,23 +5,30 @@ block content
         h2 Sign Up
         div(class='flex col group') 
             label(for='firstname') First name
-            input#firstname(type="text", name="first_name")
+            input#firstname(type="text", name="first_name" value=(first_name ? first_name: ''))
         div(class='flex col group')  
             label(for='lastname') Last name
-            input#lastname(type='text', name='last_name')
+            input#lastname(type='text', name='last_name', value=(last_name ? last_name : ''))
         div(class='flex col group')
             label(for='email') Email
-            input#email(type="text", name="email")
+            input#email(type="text", name="email", value=(email ? email : ''))
         div(class='flex col group')
             label(for='password') Password
-            input#password(type="password", name="password")
+            input#password(type="password", name="password", value=(password ? password : ''))
         div(class='flex col group')  
             label(for='confirm-password') Confirm password
             input#confirm-password(type="password", name="confirm_password")
         div(class='flex col group')
-            label(for='code') Already have membership code?
-            input#code(type='text', name='code')
+            label(for='code') Membership code
+            input#code(type='text', name='code', value=(code ? code : ''))
         button Sign up
+        
+        if errors
+            ul 
+                h3 Errors in form
+                each error in errors 
+                    li #{error.msg}
+            
         
         
     
