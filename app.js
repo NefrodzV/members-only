@@ -7,12 +7,11 @@ const mongoose = require('mongoose')
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const membersOnlyRouter = require('./routes/members_only');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').LocalStrategy
-const bcryptjs = require('bcryptjs')
+const Auth = require('./Auth')
+const session = require('express-session')
 require('dotenv').config()
 
-const DB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.ya3dsnp.mongodb.net/${process.env.DB_Name}?retryWrites=true&w=majority`
+const DB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.ya3dsnp.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
 mongoose.connect(DB_URI)
 
 const db = mongoose.connection
@@ -24,6 +23,9 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(session({secret:'cats', resave:false, saveUninitialized:true}))
+app.use(Auth.instance.initialize())
+app.use(Auth.instance.session())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
