@@ -1,15 +1,8 @@
 const User = require('../models/User')
 const bcryptjs = require('bcryptjs')
 const { body, validationResult } = require('express-validator')
-const { MongoError, MongoServerError } = require('mongodb')
+const Auth = require('../Auth')
 require('dotenv').config()
-
-
-// // Renders the homepage
-// exports.index = async (req, res, next) => {
-// 
-//     res.render('index', {title: 'Members only'})
-// }
 
 exports.sign_up_get = async (req, res, next) => {
     res.render('sign-up-form')
@@ -32,8 +25,6 @@ exports.sign_up_post = [
     async (req, res, next) => {
         const result = validationResult(req)
         const isPremium = req.body.code === process.env.MEMBERS_ONLY_CODE
-
-       
 
         if(!result.isEmpty()) {
             res.render('sign-up-form', {
@@ -70,7 +61,7 @@ exports.sign_up_post = [
                         email: req.body.email,
                         password: req.body.password,
                         code: req.body.code,
-                        errors: [{msg: 'Email already registered!'}]
+                        errors: [{ msg: 'Email already registered!' }]
                     })
                 }
             }
@@ -82,7 +73,37 @@ exports.log_in_get = async (req, res, next) => {
     res.render('log-in-form')
 }
 
-exports.log_in_post = async (req, res, next) => {
-    res.send('Log in post not implemented')
-}
+exports.log_in_post = [
+    body('username', 'Email cannot be empty')
+    .trim()
+    .isLength({ min:1 })
+    .isEmail()
+    .withMessage('Incorrect email format!').escape(),
+    body('password', 'Password cannot be empty')
+    .trim()
+    .isLength({ min:1 })
+    .escape(),
+    
+    async (req, res, next) => {
+        const result = validationResult(req)
+
+        // If there are errors re-render
+        if(!result.isEmpty()) {
+            res.render('log-in-form', {
+                username: req.body.username,
+                password: req.body.password
+            })
+            return
+        }
+        next()
+    },
+
+    Auth.instance.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: ''
+    })
+
+    
+
+]
 
