@@ -70,11 +70,15 @@ exports.sign_up_post = [
 ]
 
 exports.log_in_get = async (req, res, next) => {
-    
-    if(req.session) {
+    // If a user has already tried logging in check session messages
+    if(req.session.messages) {
         // Select the last string in the array
         const errors = [{msg: req.session.messages.slice(-1)}]
-        res.render('log-in-form', {errors: errors})
+        res.render('log-in-form', {
+            username: req.session.inputs.email,
+            password: req.session.inputs.password,
+            errors: errors
+        })
         return
     }
     

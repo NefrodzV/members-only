@@ -7,16 +7,28 @@ const Auth = (() => {
     const instance = passport
 
     instance.use(
-        new LocalStrategy(async (email, password, done) => {
+        new LocalStrategy({ passReqToCallback:true },async (req,email, password, done) => {
 
             try {
                 const user = await User.findOne({email: email})
                 if(!user) {
+                    req.session.inputs = {
+                        email: email,
+                        password: password
+                    }
+                    await req.session.save()
                     return done(null, false, {message: 'Incorrect username' })
                 }
 
                 const match = await bcryptjs.compare(password, user.password)
-                if(!match) return done(null, false, {message: 'Incorrect password'})
+                if(!match){
+                    req.session.inputs = {
+                        email: email,
+                        password: password
+                    }
+                    await req.session.save()
+                    return done(null, false, {message: 'Incorrect password'})
+                } 
 
                 return done(null, user)
             } catch(err) {
