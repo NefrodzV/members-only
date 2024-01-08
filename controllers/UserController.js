@@ -70,7 +70,15 @@ exports.sign_up_post = [
 ]
 
 exports.log_in_get = async (req, res, next) => {
-    res.render('log-in-form')
+    
+    if(req.session) {
+        // Select the last string in the array
+        const errors = [{msg: req.session.messages.slice(-1)}]
+        res.render('log-in-form', {errors: errors})
+        return
+    }
+    
+   res.render('log-in-form')
 }
 
 exports.log_in_post = [
@@ -89,21 +97,22 @@ exports.log_in_post = [
 
         // If there are errors re-render
         if(!result.isEmpty()) {
+            
             res.render('log-in-form', {
                 username: req.body.username,
-                password: req.body.password
+                password: req.body.password,
+                errors: result.array()
             })
             return
         }
+
         next()
     },
 
     Auth.instance.authenticate('local', {
         successRedirect: '/',
-        failureRedirect: ''
+        failureRedirect: '/members-only/log-in',
+        failureMessage: true
     })
-
-    
-
 ]
 

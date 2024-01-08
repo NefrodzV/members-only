@@ -3,10 +3,18 @@ extends layout
 block content 
     form(class='flex col center' method='post', action='')
         h2 Login
+        // MAKE THIS REPORT WHEN USER HAS INCORRECT PASSWORD OR USERNAME
         div(class='flex col group') 
             label(for='username') First name
-            input#username(type="text", name="username")
+            input#username(type="email", name="username", autocomplete='username', value=(username ? username : ''))
         div(class='flex col group')
             label(for='password') Password
-            input#password(type="password", name="password")
+            input#password(type="password", name="password", autocomplete='password' ,value=(password ? password : ''))
         button Log In
+        if errors 
+            ul 
+                each error in errors 
+                    li #{error.msg}
+                
+        
+    

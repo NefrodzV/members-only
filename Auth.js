@@ -8,9 +8,7 @@ const Auth = (() => {
 
     instance.use(
         new LocalStrategy(async (email, password, done) => {
-            console.log('Running local strategy froom Auth object')
-            console.log(email)
-            console.log(password)
+
             try {
                 const user = await User.findOne({email: email})
                 if(!user) {
@@ -18,7 +16,7 @@ const Auth = (() => {
                 }
 
                 const match = await bcryptjs.compare(password, user.password)
-                if(!match) return done(null, false, { message: 'Incorrect password'})
+                if(!match) return done(null, false, {message: 'Incorrect password'})
 
                 return done(null, user)
             } catch(err) {
