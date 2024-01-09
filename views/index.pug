@@ -3,3 +3,14 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  // Only those who are admins should be able to delete button
+  if(messages)
+   ul 
+    h2 Messages
+    each message in messages
+      li(class='message')
+        h3 #{message.title}
+        p #{message.user.firstName} #{message.user.lastName}
+        small #{message.timestamp}
+        p #{message.text}

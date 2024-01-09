@@ -4,8 +4,23 @@ const Message = require('../models/Message')
  *  to logged in users messages. Have a form to send messages if user is logged
  * in. Make admin be able to delete messages */
 exports.index = async (req, res, next) => {
-    // TODO: CHECK IF THERE IS A USER LOGGED IN IF NOT REDIRECT TO SIGN UP
-    res.render('index', { title: 'Members only' })
+    const messageList = await Message.find().populate('user').exec()
+  console.log(messageList)
+    // Only runs if there is a user logged in
+    if(req.user) {
+        console.log('There is a user logged in')
+        res.render('index', {
+          title: 'Members only',
+          user: req.user,
+          messages: messageList
+        })
+        return
+    }
+    
+    res.render('index', { 
+        title: 'Members only',
+        messages: messageList
+     })
 }
 
 exports.message_list = (req, res, next) => {
