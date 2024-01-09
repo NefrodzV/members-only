@@ -24,7 +24,7 @@ exports.sign_up_post = [
 
     async (req, res, next) => {
         const result = validationResult(req)
-        const isPremium = req.body.code === process.env.MEMBERS_ONLY_CODE
+        const isMember = req.body.code === process.env.MEMBERS_ONLY_CODE
 
         if(!result.isEmpty()) {
             res.render('sign-up-form', {
@@ -47,7 +47,7 @@ exports.sign_up_post = [
                     lastName: req.body.last_name,
                     email: req.body.email,
                     password: hashedPassword,
-                    membership : isPremium ? 'Premium' : 'Basic'
+                    isMember : isMember
                 })
                 await user.save()
                 
