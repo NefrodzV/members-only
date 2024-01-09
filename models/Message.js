@@ -8,9 +8,9 @@ const MessageSchema = new Schema({
     text: String
 })
 
-const Message = mongoose.model(
+const Message = 
+
+module.exports = mongoose.model(
     'Message',
     MessageSchema
 )
-
-module.exports = Message
