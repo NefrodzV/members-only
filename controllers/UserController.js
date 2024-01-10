@@ -4,11 +4,11 @@ const { body, validationResult } = require('express-validator')
 const Auth = require('../Auth')
 require('dotenv').config()
 
-exports.sign_up_get = async (req, res, next) => {
+exports.signUpGet = async (req, res, next) => {
     res.render('sign-up-form')
 }
 
-exports.sign_up_post = [
+exports.signUpPost = [
     body('first_name', 'First name cannot be empty').trim().isLength({ min: 1}).escape(),
     body('last_name', 'Last name cannot be empty').trim().isLength({ min: 1}).escape(),
     body('email', 'Email cannot be empty').trim().isLength({ min: 1 }).isEmail().withMessage('This has to be an email').escape(),
@@ -69,7 +69,7 @@ exports.sign_up_post = [
     }
 ]
 
-exports.log_in_get = async (req, res, next) => {
+exports.loginGet = async (req, res, next) => {
     // If a user has already tried logging in check session messages
     if(req.session.messages) {
         // Select the last string in the array
@@ -85,7 +85,7 @@ exports.log_in_get = async (req, res, next) => {
    res.render('log-in-form')
 }
 
-exports.log_in_post = [
+exports.loginPost = [
     body('username', 'Email cannot be empty')
     .trim()
     .isLength({ min:1 })
