@@ -29,4 +29,51 @@ button {
   padding: 1rem;
 }
 
+body {
+  position: relative;
+}
 
+li a {
+  display: none;
+}
+
+li a[show] {
+  display: block;
+}
+
+.dialog {
+  padding: 16px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  border: 1px solid black 
+}
+
+.msg-text {
+  width: 50ch;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button, button {
+  cursor: pointer;
+  border-style: outset;
+  border: 2px solid gray;
+  font-weight: bold;
+  box-sizing: border-box;
+  padding: 16px;
+  text-transform: uppercase;
+  justify-content: center;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  width:100px;
+  height: 30px;
+  color: white;
+  background: blue;
+  font: Arial 12px;
+}
