@@ -1,0 +1,24 @@
+extends layout 
+
+block content 
+    form(class='dialog' action="", method="post")
+        .content
+            h2 DELETE MESSAGE CONFIRMATION
+            h3 Are you sure you want to delete this message?
+            p 
+                |
+                span(class='bold') Author: 
+                | #{message.user.firstName} #{message.user.lastName}
+            p 
+             |
+             span(class='bold') Date: 
+             | #{message.timestamp}
+            p(class='msg-text') 
+                |
+                span(class='bold') Message: 
+                br
+                |Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis eum accusamus soluta exercitationem numquam ullam, provident a. Quas similique reprehenderit, nesciunt nisi atque, exercitationem quisquam obcaecati tempora laborum itaque culpa!
+            hr
+            .controls
+                a(href='/members-only', class='button') Cancel
+                button(class='button') Delete
