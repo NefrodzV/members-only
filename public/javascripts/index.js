@@ -21,7 +21,9 @@ function clickHandler(e) {
             const author = children[1].textContent
             const date = children[2].textContent
             const text = children[3].textContent
+            
             updateDialog(id, author, date, text)
+            
             
         break;
 
@@ -32,29 +34,33 @@ function clickHandler(e) {
 }
 
 function updateDialog(id, author, date, text) {
+    
     const formContent = document.querySelector('.content')
 
-    const children = formContent.children
+    const children = formContent.childNodes
     const idEl = children[1]
     const authorEl = children[2]
     const dateEl = children[3]
     const messageEl = children[4]
 
+    const authorText = document.createTextNode(author)
+    const dateText = document.createTextNode(date)
+    const messageText = document.createTextNode(text)
+
     idEl.value = id
-    authorEl.append(author)
-    dateEl.append(date)
-    messageEl.append(text)
+    authorEl.append(authorText)
+    dateEl.append(dateText)
+    messageEl.append(messageText)
 }
 
 // Removes the text of certain elements in the dialog form
 function removeText() {
     const formContent = document.querySelector('.content')
     const children = formContent.children
-    const idEl = children[1]
+    // const idEl = children[1]
     const authorEl = children[2]
     const dateEl = children[3]
     const messageEl = children[4]
-
     removeTextNode(authorEl)
     removeTextNode(dateEl)
     removeTextNode(messageEl) 
@@ -62,7 +68,7 @@ function removeText() {
 
 // Checks the children of element and if there is node text remove it
 function removeTextNode(el) {
-    el.childNodes.forEach(val => {
+    el.childNodes.forEach((val) => {
         if(val.nodeType === Node.TEXT_NODE) {
             val.remove()
         }
