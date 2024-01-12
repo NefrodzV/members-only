@@ -26,8 +26,6 @@ a {
   margin-block: .5rem;
 }
 
-
-
 li a {
   display: none;
 }
@@ -41,15 +39,23 @@ dialog {
   box-shadow: 3px 3px 0 black;
   /* padding: 16px; */
   position: absolute;
-  top: 50%; 
+  
   transition: transform .5s;
   transform: translate(0, -50%) scale(0);
   border: 1px solid black 
 }
 
 dialog[open] {
-  transform: translate(0, -50%) scale(1) ;
+  transform: translate(0) scale(1) ;
 }
+
+.message > button {
+  width: fit-content; 
+  background-color: white ;
+  border-color: black;
+ 
+}
+
 .msg-text {
   height: min(10vh, 20ch);
   width: 50ch;
@@ -59,6 +65,7 @@ dialog[open] {
   display: flex;
   justify-content: space-between;
 }
+
 
 .button, button {
   box-shadow: 2px 3px black;
@@ -92,12 +99,19 @@ button:active, .button:active {
   font-weight: bold;
 }
 
-@keyframes scale {
-  0% {
-    transform: scale(0)
-  }
-
-  100% {
-    transform: scale(1);
-  }
+#message-form {
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  bottom: 1rem;
+  display: flex;
+  
+}
+#message-form > * {
+  height: 35px;
+  box-sizing: border-box;
+  box-shadow: none;
+}
+#message {
+  flex: 1;
 }
