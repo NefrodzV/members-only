@@ -4,6 +4,25 @@ body {
   min-height: 100vh;
   position: relative;
 }
+
+header, nav > ul{
+  display: flex;
+  align-items: center;
+}
+header {
+  justify-content: space-between;
+  padding-inline: 1rem;
+}
+
+header > span {
+  font-weight:bold;
+  font-size: 2rem;
+}
+nav > ul {
+  font-size: 1.5rem;
+  gap: 1rem;
+  list-style: none;
+}
 h1 {
   margin: 0;
 }
@@ -18,26 +37,27 @@ a {
 .col {
   flex-direction: column;
 }
+
 .flex {
   display: flex;
 }
+
 .group {
   width: 25%;
   margin-block: .5rem;
 }
 
-li a {
+li button, #message-form {
   display: none;
 }
 
-li a[show] {
-  display: block;
+li button[show], #message-form[show] {
+  display: flex;
 }
 
 dialog {
   display: block;
   box-shadow: 3px 3px 0 black;
-  /* padding: 16px; */
   position: absolute;
   
   transition: transform .5s;
@@ -104,7 +124,7 @@ button:active, .button:active {
   width: 100%;
   position: absolute;
   bottom: 1rem;
-  display: flex;
+  
   
 }
 #message-form > * {
