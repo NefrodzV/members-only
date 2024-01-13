@@ -6,6 +6,15 @@ html
 
   body
     script(src="/javascripts/index.js", defer) 
+    header 
+      span Members Only 
+      nav 
+        ul 
+          li 
+            a(class='button',href="/members-only/sign-up") Register
+          li 
+            a(class='button',href="/members-only/log-in") Login
+        
     block content
 
     
