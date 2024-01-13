@@ -35,7 +35,7 @@ function clickHandler(e) {
 
 function updateDialog(id, author, date, text) {
     
-    const formContent = document.querySelector('.content')
+    const formContent = document.querySelector('dialog form .content')
 
     const children = formContent.childNodes
     const idEl = children[1]
@@ -55,7 +55,7 @@ function updateDialog(id, author, date, text) {
 
 // Removes the text of certain elements in the dialog form
 function removeText() {
-    const formContent = document.querySelector('.content')
+    const formContent = document.querySelector('dialog form .content')
     const children = formContent.children
     // const idEl = children[1]
     const authorEl = children[2]
