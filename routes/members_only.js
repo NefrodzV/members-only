@@ -17,9 +17,12 @@ router.post('/log-in', UserController.loginPost)
 router.get('/messages', MessageController.messageListGet)
 
 /** Same page will have a for to post messages when they are logged in! */
-router.post('/messages', MessageController.createMessagePost)
+router.post('/message', MessageController.createMessagePost)
+
+router.post('/message/delete', MessageController.deleteMessagePost)
 
 router.get('/message/:id/delete', MessageController.deleteMessageGet)
 
 router.post('/message/:id/delete', MessageController.deleteMessagePost)
+
 module.exports = router
