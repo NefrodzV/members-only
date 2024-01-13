@@ -3,12 +3,14 @@ const Schema = mongoose.Schema
 
 const MessageSchema = new Schema({
     title: { type: String, required: true },
-    userId: { type: Schema.Types.ObjectId, required: true},
+    user: { type: Schema.Types.ObjectId, ref:'User',required: true},
     timestamp: { type: Date, default: Date.now },
     text: String
 })
 
-const Message = 
+MessageSchema.virtual('url').get( function() {
+    return '/members-only/message/'+ this._id
+})
 
 module.exports = mongoose.model(
     'Message',
